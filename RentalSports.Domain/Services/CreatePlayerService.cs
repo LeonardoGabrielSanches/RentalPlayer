@@ -1,23 +1,24 @@
-﻿using RentalSports.Domain.DTOs;
-using RentalSports.Domain.Entities;
+﻿using RentalSports.Domain.Entities;
 using RentalSports.Domain.Interfaces.Repositories;
 using RentalSports.Domain.Interfaces.Services;
+using RentalSports.Domain.Provider;
 
 namespace RentalSports.Domain.Services
 {
     public class CreatePlayerService : ICreatePlayerService
     {
         private readonly IPlayerRepository _playerRepository;
+        private readonly EncryptProvider _encryptProvider;
 
-        public CreatePlayerService(IPlayerRepository playerRepository)
+        public CreatePlayerService(IPlayerRepository playerRepository,
+                                   EncryptProvider encryptProvider)
         {
             _playerRepository = playerRepository;
+            _encryptProvider = encryptProvider;
         }
 
-        public Player Create(CreatePlayerDTO createPlayerDTO)
+        public Player Create(Player player)
         {
-            var player = (Player)createPlayerDTO;
-
             player.Validate();
 
             if (player.Invalid)
@@ -30,6 +31,10 @@ namespace RentalSports.Domain.Services
                 player.AddNotification(nameof(Player), "Um usuário já foi cadastrado com este e-mail.");
                 return player;
             }
+
+            string encryptedPassword = _encryptProvider.EncryptPassword(player.Password);
+
+            player.ApplyEncryptedPassword(encryptedPassword);
 
             _playerRepository.Save(player);
 

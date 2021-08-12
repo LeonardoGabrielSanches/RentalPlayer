@@ -65,6 +65,9 @@ namespace RentalSports.Domain.Entities
                 .IsNotNullOrEmpty(MobileNumber, "Telefone", "O campo telefone deve estar preenchido."));
         }
 
+        public void ApplyEncryptedPassword(string encryptedPassword)
+            => Password = encryptedPassword;
+
         // TODO : Availability
     }
 }

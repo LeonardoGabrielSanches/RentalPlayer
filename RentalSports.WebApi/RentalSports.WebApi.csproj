@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RentalSports.Domain\RentalSports.Domain.csproj" />
+    <ProjectReference Include="..\RentalSports.Infra.Data.MongoDB\RentalSports.Infra.Data.MongoDB.csproj" />
   </ItemGroup>
 
 

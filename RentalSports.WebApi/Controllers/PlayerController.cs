@@ -1,32 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RentalSports.Domain.DTOs;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using RentalSports.Domain.Interfaces.Services;
+using RentalSports.WebApi.ViewModels.Players;
 
 namespace RentalSports.WebApi.Controllers
 {
     [ApiController]
     [Route("v1/[controller]")]
+    [Produces("application/json")]
     public class PlayerController : ControllerBase
     {
         [HttpPost]
-        public IActionResult CreatePlayer([FromServices] ICreatePlayerService createPlayerService)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult CreatePlayer([FromServices] ICreatePlayerService createPlayerService,
+                                          [FromBody] CreatePlayerViewModel createPlayerViewModel)
         {
-            var player = new CreatePlayerDTO()
-            {
-                Name = "",
-                Email = "sleonardogabriel@gmail.com",
-                Birth = new System.DateTime(1999, 1, 19),
-                Height = 1.78m,
-                Weight = 85.36m,
-                MobileNumber = "15 996693535",
-                Password = "Leonardo123",
-                Latitude = -23.5012623m,
-                Longitude = -47.4725131m
-            };
+            var player = createPlayerService.Create(createPlayerViewModel);
 
-            var a = createPlayerService.Create(player);
+            if (player.Invalid)
+                return BadRequest(new { message = player.NotificationError });
 
-            return Ok(a);
+            return Created(string.Empty, player);
         }
     }
 }
