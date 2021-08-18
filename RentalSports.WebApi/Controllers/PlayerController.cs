@@ -7,8 +7,7 @@ namespace RentalSports.WebApi.Controllers
 {
     [ApiController]
     [Route("v1/[controller]")]
-    [Produces("application/json")]
-    public class PlayerController : ControllerBase
+    public class PlayerController : MainController
     {
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -16,10 +15,13 @@ namespace RentalSports.WebApi.Controllers
         public IActionResult CreatePlayer([FromServices] ICreatePlayerService createPlayerService,
                                           [FromBody] CreatePlayerViewModel createPlayerViewModel)
         {
+            if (!ModelState.IsValid)
+                return CustomResponse(ModelState);
+
             var player = createPlayerService.Create(createPlayerViewModel);
 
             if (player.Invalid)
-                return BadRequest(new { message = player.NotificationError });
+                return CustomResponse(player);
 
             return Created(string.Empty, player);
         }
