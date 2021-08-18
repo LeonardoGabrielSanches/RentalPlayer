@@ -2,9 +2,8 @@
 
 namespace RentalSports.Domain.Interfaces.Repositories
 {
-    public interface IPlayerRepository
+    public interface IPlayerRepository : IRepository<Player>
     {
         Player GetPlayerByEmail(string email);
-        Player Save(Player player);
     }
 }
