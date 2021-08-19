@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RentalSports.WebApi.Configuration;
 using RentalSports.WebApi.IoC;
 
 namespace RentalSports.WebApi
@@ -22,15 +24,17 @@ namespace RentalSports.WebApi
         {
             services.Register();
 
+            services.AddCors();
             services.AddControllers();
+
+            services.ConfigureAuthorization(Configuration);
+
+            services.AddSwaggerGen();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
-
-            services.AddCors();
-            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +56,7 @@ namespace RentalSports.WebApi
               .AllowAnyMethod()
               .AllowAnyHeader());
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using RentalSports.Domain.Entities;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 namespace RentalSports.WebApi.Controllers
 {
     [ApiController]
-    [Produces("application/json")]
+    [Authorize]
     public abstract class MainController : ControllerBase
     {
         private readonly List<string> _errors = new List<string>();
@@ -40,7 +41,6 @@ namespace RentalSports.WebApi.Controllers
 
         protected bool OperationValid()
             => !_errors.Any();
-
 
         protected void AddError(string erro)
             => _errors.Add(erro);

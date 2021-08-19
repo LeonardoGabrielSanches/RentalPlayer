@@ -22,6 +22,12 @@ namespace RentalSports.Domain.Entities
             Password = password;
         }
 
+        protected User(string email, string password)
+        {
+            Email = email;
+            Password = password;
+        }
+
         public string Name { get; protected set; }
         public string Email { get; protected set; }
         public string Password { get; protected set; }

@@ -46,6 +46,10 @@ namespace RentalSports.Domain.Entities
             Location = location;
         }
 
+        public Player(string email, string password) : base(email, password)
+        {
+        }
+
         public decimal Height { get; private set; }
         public decimal Weight { get; private set; }
         public DateTime Birth { get; private set; }

@@ -29,7 +29,7 @@ namespace RentalSports.Domain.Provider
             return encryptedPassowrd.ToString();
         }
 
-        public bool ComparePassword(string password, string encryptedPassword)
+        public bool PasswordMatch(string password, string encryptedPassword)
         {
             string passwordToCompare = EncryptPassword(password);
 

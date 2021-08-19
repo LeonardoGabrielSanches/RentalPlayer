@@ -26,7 +26,9 @@ namespace RentalSports.WebApi.IoC
             });
 
             services.AddScoped<IPlayerRepository, PlayerRepository>();
+
             services.AddScoped<ICreatePlayerService, CreatePlayerService>();
+            services.AddScoped<IAuthenticateUserService, AuthenticateUserService>();
         }
     }
 }
