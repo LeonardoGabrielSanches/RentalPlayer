@@ -10,7 +10,7 @@ namespace RentalSports.Domain.Entities
         public Player() { }
 
         public Player(
-           Guid id,
+           string id,
            string name,
            string email,
            string password,
@@ -71,6 +71,36 @@ namespace RentalSports.Domain.Entities
 
         public void ApplyEncryptedPassword(string encryptedPassword)
             => Password = encryptedPassword;
+
+        public void Update(string name,
+                           string email,
+                           decimal height,
+                           decimal weight,
+                           DateTime birth,
+                           string mobileNumber,
+                           Location location)
+        {
+            Name = name;
+            Email = email;
+            Height = height;
+            Weight = weight;
+            Birth = birth;
+            MobileNumber = mobileNumber;
+            Location = location;
+        }
+
+        public int CalculateAge()
+        {
+            var dateTimeNow = DateTime.Now;
+
+            var age = dateTimeNow.Year - Birth.Year;
+
+            if (dateTimeNow.Month > Birth.Month)
+                age++;
+
+            return age;
+        }
+
 
         // TODO : Availability
     }

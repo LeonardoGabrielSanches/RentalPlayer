@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace RentalSports.Domain.Entities
+﻿namespace RentalSports.Domain.Entities
 {
     public abstract class User : BaseEntity
     {
         protected User() { }
 
-        protected User(Guid id, string name, string email, string password)
+        protected User(string id, string name, string email, string password)
         {
             Id = id;
             Name = name;
@@ -16,7 +14,6 @@ namespace RentalSports.Domain.Entities
 
         protected User(string name, string email, string password)
         {
-            Id = GenerateNewGuid();
             Name = name;
             Email = email;
             Password = password;

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RentalSports.WebApi.Configuration;
 using RentalSports.WebApi.IoC;
+using RentalSports.WebApi.Middleware;
+using System;
 
 namespace RentalSports.WebApi
 {
@@ -58,6 +61,8 @@ namespace RentalSports.WebApi
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<UserMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

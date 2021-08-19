@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RentalSports.Domain.Entities;
 using RentalSports.Domain.Interfaces.Repositories;
 using RentalSports.Domain.Interfaces.Services;
 using RentalSports.Domain.Provider;
@@ -25,10 +26,18 @@ namespace RentalSports.WebApi.IoC
                 return new EncryptProvider(secret);
             });
 
+            services.AddSingleton(service =>
+            {
+                return new UserAuthenticated();
+            });
+
             services.AddScoped<IPlayerRepository, PlayerRepository>();
 
-            services.AddScoped<ICreatePlayerService, CreatePlayerService>();
             services.AddScoped<IAuthenticateUserService, AuthenticateUserService>();
+
+            services.AddScoped<ICreatePlayerService, CreatePlayerService>();
+            services.AddScoped<IUpdatePlayerService, UpdatePlayerService>();
+
         }
     }
 }

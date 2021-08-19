@@ -6,6 +6,7 @@ using RentalSports.Infra.Data.MongoDB.Documents;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using MongoDB.Bson;
 
 namespace RentalSports.Infra.Data.MongoDB.Repositories
 {
@@ -21,8 +22,12 @@ namespace RentalSports.Infra.Data.MongoDB.Repositories
         public IEnumerable<Player> GetAll()
             => _playerCollection.Find(_ => true).ToList().Select(player => (Player)player);
 
-        public Player GetById(Guid id)
-            => _playerCollection.Find(x => x.IdPlayer == id).FirstOrDefault();
+        public Player GetById(string id)
+        {
+            var objectId = ObjectId.Parse(id);
+
+            return _playerCollection.Find(x => x.Id == objectId).FirstOrDefault();
+        }
 
         public Player GetPlayerByEmail(string email)
             => _playerCollection.Find(x => x.Email == email).FirstOrDefault();
@@ -36,14 +41,16 @@ namespace RentalSports.Infra.Data.MongoDB.Repositories
 
         public Player Update(Player entity)
         {
-            _playerCollection.ReplaceOne(x => x.IdPlayer == entity.Id, entity);
+            var objectId = ObjectId.Parse(entity.Id);
+
+            _playerCollection.ReplaceOne(x => x.Id == objectId, entity);
 
             return entity;
         }
 
         public void Delete(Player entity)
         {
-            _playerCollection.DeleteOne(x => x.IdPlayer == entity.Id);
+            _playerCollection.DeleteOne(x => x.Id.ToString() == entity.Id);
         }
     }
 }

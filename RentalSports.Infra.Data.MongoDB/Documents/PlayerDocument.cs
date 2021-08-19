@@ -11,9 +11,6 @@ namespace RentalSports.Infra.Data.MongoDB.Documents
     {
         public ObjectId Id { get; set; }
 
-        [BsonElement(PlayerConstants.Id)]
-        public Guid IdPlayer { get; set; }
-
         [BsonElement(PlayerConstants.Name)]
         public string Name { get; set; }
 
@@ -44,7 +41,7 @@ namespace RentalSports.Infra.Data.MongoDB.Documents
         public static implicit operator PlayerDocument(Player player)
             => new PlayerDocument()
             {
-                IdPlayer = player.Id,
+                Id = string.IsNullOrEmpty(player.Id) ? ObjectId.GenerateNewId() : ObjectId.Parse(player.Id),
                 Name = player.Name,
                 Email = player.Email,
                 Password = player.Password,
@@ -62,7 +59,7 @@ namespace RentalSports.Infra.Data.MongoDB.Documents
                 return new Player();
 
             return new Player(
-                id: playerDocument.IdPlayer,
+                id: playerDocument.Id.ToString(),
                 name: playerDocument.Name,
                 email: playerDocument.Email,
                 password: playerDocument.Password,

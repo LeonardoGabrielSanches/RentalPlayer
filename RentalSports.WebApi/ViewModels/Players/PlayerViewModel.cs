@@ -5,7 +5,7 @@ namespace RentalSports.WebApi.ViewModels.Players
 {
     public class PlayerViewModel
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
@@ -16,6 +16,8 @@ namespace RentalSports.WebApi.ViewModels.Players
         public decimal Weight { get; set; }
 
         public DateTime Birth { get; set; }
+
+        public int Age { get; set; }
 
         public string MobileNumber { get; set; }
 
@@ -32,6 +34,7 @@ namespace RentalSports.WebApi.ViewModels.Players
                 Height = player.Height,
                 Weight = player.Weight,
                 Birth = player.Birth,
+                Age = player.CalculateAge(),
                 MobileNumber = player.MobileNumber,
                 Latitude = player.Location.Latitude,
                 Longitude = player.Location.Longitude

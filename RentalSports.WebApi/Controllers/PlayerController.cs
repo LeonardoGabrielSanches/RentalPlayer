@@ -42,5 +42,22 @@ namespace RentalSports.WebApi.Controllers
 
             return Created(string.Empty, (PlayerViewModel)player);
         }
+
+        [HttpPut]
+        [ProducesResponseType(typeof(PlayerViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult UpdatePlayer([FromServices] IUpdatePlayerService updatePlayerService,
+                                          [FromBody] UpdatePlayerViewModel updatePlayerViewModel)
+        {
+            if (!ModelState.IsValid)
+                return CustomResponse(ModelState);
+
+            var player = updatePlayerService.Update(updatePlayerViewModel);
+
+            if (player.Invalid)
+                return CustomResponse(player);
+
+            return CustomResponse((PlayerViewModel)player);
+        }
     }
 }
