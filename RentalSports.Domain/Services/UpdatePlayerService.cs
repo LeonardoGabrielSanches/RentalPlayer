@@ -41,7 +41,8 @@ namespace RentalSports.Domain.Services
                         birth: player.Birth,
                         mobileNumber: player.MobileNumber,
                         location: new ValueObject.Location(latitude: player.Location.Latitude,
-                                                           longitude: player.Location.Longitude));
+                                                           longitude: player.Location.Longitude),
+                        avatarUrl: player.AvatarUrl);
 
             playerDB.Validate();
 

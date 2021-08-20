@@ -6,7 +6,6 @@
             Database = "Player";
 
         public const string
-            Id = "IdPlayer",
             Name = "Name",
             Email = "Email",
             Password = "Password",
@@ -15,6 +14,7 @@
             Birth = "Birth",
             MobileNumber = "MobileNumber",
             Latitude = "Latitude",
-            Longitude = "Longitude";
+            Longitude = "Longitude",
+            AvatarUrl = "AvatarUrl";
     }
 }

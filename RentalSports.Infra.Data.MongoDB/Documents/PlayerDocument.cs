@@ -38,6 +38,9 @@ namespace RentalSports.Infra.Data.MongoDB.Documents
         [BsonElement(PlayerConstants.Longitude)]
         public decimal Longitude { get; set; }
 
+        [BsonElement(PlayerConstants.AvatarUrl)]
+        public string AvatarUrl { get; set; }
+
         public static implicit operator PlayerDocument(Player player)
             => new PlayerDocument()
             {
@@ -50,7 +53,8 @@ namespace RentalSports.Infra.Data.MongoDB.Documents
                 Birth = player.Birth,
                 MobileNumber = player.MobileNumber,
                 Latitude = player.Location.Latitude,
-                Longitude = player.Location.Longitude
+                Longitude = player.Location.Longitude,
+                AvatarUrl = player.AvatarUrl
             };
 
         public static implicit operator Player(PlayerDocument playerDocument)
@@ -68,7 +72,8 @@ namespace RentalSports.Infra.Data.MongoDB.Documents
                 birth: playerDocument.Birth,
                 mobileNumber: playerDocument.MobileNumber,
                 location: new Location(latitude: playerDocument.Latitude,
-                                       longitude: playerDocument.Longitude));
+                                       longitude: playerDocument.Longitude),
+                avatarUrl: playerDocument.AvatarUrl);
         }
     }
 }

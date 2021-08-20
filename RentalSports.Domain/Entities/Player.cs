@@ -18,7 +18,8 @@ namespace RentalSports.Domain.Entities
            decimal weight,
            DateTime birth,
            string mobileNumber,
-           Location location)
+           Location location,
+           string avatarUrl)
            : base(id, name, email, password)
         {
             Height = height;
@@ -26,6 +27,7 @@ namespace RentalSports.Domain.Entities
             Birth = birth;
             MobileNumber = mobileNumber;
             Location = location;
+            AvatarUrl = avatarUrl;
         }
 
         public Player(
@@ -36,7 +38,8 @@ namespace RentalSports.Domain.Entities
             decimal weight,
             DateTime birth,
             string mobileNumber,
-            Location location)
+            Location location,
+            string avatarUrl)
             : base(name, email, password)
         {
             Height = height;
@@ -44,6 +47,7 @@ namespace RentalSports.Domain.Entities
             Birth = birth;
             MobileNumber = mobileNumber;
             Location = location;
+            AvatarUrl = avatarUrl;
         }
 
         public Player(string email, string password) : base(email, password)
@@ -55,6 +59,7 @@ namespace RentalSports.Domain.Entities
         public DateTime Birth { get; private set; }
         public string MobileNumber { get; private set; }
         public Location Location { get; private set; }
+        public string AvatarUrl { get; private set; }
 
         public override void Validate()
         {
@@ -78,7 +83,8 @@ namespace RentalSports.Domain.Entities
                            decimal weight,
                            DateTime birth,
                            string mobileNumber,
-                           Location location)
+                           Location location,
+                           string avatarUrl)
         {
             Name = name;
             Email = email;
@@ -87,6 +93,7 @@ namespace RentalSports.Domain.Entities
             Birth = birth;
             MobileNumber = mobileNumber;
             Location = location;
+            AvatarUrl = avatarUrl;
         }
 
         public int CalculateAge()

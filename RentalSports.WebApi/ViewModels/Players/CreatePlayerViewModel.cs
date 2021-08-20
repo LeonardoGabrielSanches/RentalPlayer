@@ -38,6 +38,8 @@ namespace RentalSports.WebApi.ViewModels.Players
         [Required(ErrorMessage = "O campo 'Longitude' deve estar preenchido.")]
         public decimal Longitude { get; set; }
 
+        public string AvatarUrl { get; set; }
+
         public static implicit operator Player(CreatePlayerViewModel createPlayerViewModel)
             => new Player(
                 name: createPlayerViewModel.Name,
@@ -48,6 +50,7 @@ namespace RentalSports.WebApi.ViewModels.Players
                 birth: createPlayerViewModel.Birth,
                 mobileNumber: createPlayerViewModel.MobileNumber,
                 location: new Location(latitude: createPlayerViewModel.Latitude,
-                                       longitude: createPlayerViewModel.Longitude));
+                                       longitude: createPlayerViewModel.Longitude),
+                avatarUrl: createPlayerViewModel.AvatarUrl);
     }
 }

@@ -25,6 +25,8 @@ namespace RentalSports.WebApi.ViewModels.Players
 
         public decimal Longitude { get; set; }
 
+        public string AvatarUrl { get; set; }
+
         public static implicit operator PlayerViewModel(Player player)
             => new PlayerViewModel()
             {
@@ -37,7 +39,8 @@ namespace RentalSports.WebApi.ViewModels.Players
                 Age = player.CalculateAge(),
                 MobileNumber = player.MobileNumber,
                 Latitude = player.Location.Latitude,
-                Longitude = player.Location.Longitude
+                Longitude = player.Location.Longitude,
+                AvatarUrl = player.AvatarUrl
             };
     }
 }
