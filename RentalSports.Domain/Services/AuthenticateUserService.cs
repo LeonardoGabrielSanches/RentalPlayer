@@ -1,4 +1,5 @@
 ﻿using RentalSports.Domain.Entities;
+using RentalSports.Domain.Errors;
 using RentalSports.Domain.Interfaces.Repositories;
 using RentalSports.Domain.Interfaces.Services;
 using RentalSports.Domain.Provider;
@@ -22,17 +23,11 @@ namespace RentalSports.Domain.Services
             var findUser = _playerRepository.GetPlayerByEmail(user.Email);
 
             if (findUser is null)
-            {
-                user.AddNotification(nameof(User), "Email de usuário não encontrado.");
-                return user;
-            }
+                throw new DomainException("Email de usuário não encontrado.");
 
             if (!_encryptProvider.PasswordMatch(password: user.Password,
                                                 encryptedPassword: findUser.Password))
-            {
-                user.AddNotification(nameof(User), "Email ou senha incorretos.");
-                return user;
-            }
+                throw new DomainException("Email ou senha incorretos.");
 
             return findUser;
         }

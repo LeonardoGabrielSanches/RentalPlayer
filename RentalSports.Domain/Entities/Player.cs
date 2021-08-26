@@ -48,6 +48,8 @@ namespace RentalSports.Domain.Entities
             MobileNumber = mobileNumber;
             Location = location;
             AvatarUrl = avatarUrl;
+
+            Validate();
         }
 
         public Player(string email, string password) : base(email, password)
@@ -94,6 +96,8 @@ namespace RentalSports.Domain.Entities
             MobileNumber = mobileNumber;
             Location = location;
             AvatarUrl = avatarUrl;
+
+            Validate();
         }
 
         public int CalculateAge()

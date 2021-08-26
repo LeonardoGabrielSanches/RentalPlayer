@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using RentalSports.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,15 +25,6 @@ namespace RentalSports.WebApi.Controllers
             var errors = modelState.Values.SelectMany(e => e.Errors);
             foreach (var error in errors)
                 AddError(error.ErrorMessage);
-
-            return CustomResponse();
-        }
-
-        protected ActionResult CustomResponse(BaseEntity entity)
-        {
-            var errors = entity.Notifications.Select(notification => notification.Message);
-            foreach (var error in errors)
-                AddError(error);
 
             return CustomResponse();
         }

@@ -20,9 +20,6 @@ namespace RentalSports.WebApi.Controllers
 
             var user = authenticateUserService.AuthenticateUser(loginViewModel);
 
-            if (!user.IsValid)
-                return CustomResponse(user);
-
             var token = tokenProvider.GenerateToken(user);
 
             return CustomResponse(UserViewModel.MapUserViewModel(user, token));

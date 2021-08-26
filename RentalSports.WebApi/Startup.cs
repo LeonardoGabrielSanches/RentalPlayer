@@ -62,6 +62,7 @@ namespace RentalSports.WebApi
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseMiddleware<ErrorMiddleware>();
             app.UseMiddleware<UserMiddleware>();
 
             app.UseEndpoints(endpoints =>

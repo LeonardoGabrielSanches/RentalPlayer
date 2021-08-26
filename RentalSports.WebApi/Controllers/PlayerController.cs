@@ -37,9 +37,6 @@ namespace RentalSports.WebApi.Controllers
 
             var player = createPlayerService.Create(createPlayerViewModel);
 
-            if (player.Invalid)
-                return CustomResponse(player);
-
             return Created(string.Empty, (PlayerViewModel)player);
         }
 
@@ -53,9 +50,6 @@ namespace RentalSports.WebApi.Controllers
                 return CustomResponse(ModelState);
 
             var player = updatePlayerService.Update(updatePlayerViewModel);
-
-            if (player.Invalid)
-                return CustomResponse(player);
 
             return CustomResponse((PlayerViewModel)player);
         }

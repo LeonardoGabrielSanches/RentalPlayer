@@ -1,4 +1,5 @@
 ﻿using RentalSports.Domain.Entities;
+using RentalSports.Domain.Errors;
 using RentalSports.Domain.Interfaces.Repositories;
 using RentalSports.Domain.Interfaces.Services;
 
@@ -21,18 +22,12 @@ namespace RentalSports.Domain.Services
             var playerDB = _playerRepository.GetById(_userAuthenticated.Id);
 
             if (playerDB is null)
-            {
-                player.AddNotification("Usuário não encontrado.");
-                return player;
-            }
+                throw new DomainException("Usuário não encontrado.");
 
             var findPlayerEmail = _playerRepository.GetPlayerByEmail(player.Email);
 
             if (!CanUpdateEmail(findPlayerEmail))
-            {
-                player.AddNotification("Email já está sendo utilizado.");
-                return player;
-            }
+                throw new DomainException("Email já está sendo utilizado.");
 
             playerDB.Update(name: player.Name,
                         email: player.Email,
@@ -44,10 +39,8 @@ namespace RentalSports.Domain.Services
                                                            longitude: player.Location.Longitude),
                         avatarUrl: player.AvatarUrl);
 
-            playerDB.Validate();
-
-            if (!playerDB.IsValid)
-                return player;
+            if (playerDB.Invalid)
+                throw new DomainException(playerDB.NotificationError);
 
             _playerRepository.Update(playerDB);
 

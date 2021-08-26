@@ -1,4 +1,5 @@
 ﻿using RentalSports.Domain.Entities;
+using RentalSports.Domain.Errors;
 using RentalSports.Domain.Interfaces.Repositories;
 using RentalSports.Domain.Interfaces.Services;
 using RentalSports.Domain.Provider;
@@ -19,18 +20,13 @@ namespace RentalSports.Domain.Services
 
         public Player Create(Player player)
         {
-            player.Validate();
-
             if (player.Invalid)
-                return player;
+                throw new DomainException(player.NotificationError);
 
             var playerWithSameEmail = _playerRepository.GetPlayerByEmail(player.Email);
 
             if (PlayerAlreadyExists(playerWithSameEmail))
-            {
-                player.AddNotification(nameof(Player), "Um usuário já foi cadastrado com este e-mail.");
-                return player;
-            }
+                throw new DomainException("Um usuário já foi cadastrado com este e-mail.");
 
             string encryptedPassword = _encryptProvider.EncryptPassword(player.Password);
 
