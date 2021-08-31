@@ -14,6 +14,7 @@ namespace RentalSports.Domain.Entities
            string name,
            string email,
            string password,
+           string description,
            decimal height,
            decimal weight,
            DateTime birth,
@@ -22,6 +23,7 @@ namespace RentalSports.Domain.Entities
            string avatarUrl)
            : base(id, name, email, password)
         {
+            Description = description;
             Height = height;
             Weight = weight;
             Birth = birth;
@@ -34,6 +36,7 @@ namespace RentalSports.Domain.Entities
             string name,
             string email,
             string password,
+            string description,
             decimal height,
             decimal weight,
             DateTime birth,
@@ -42,6 +45,7 @@ namespace RentalSports.Domain.Entities
             string avatarUrl)
             : base(name, email, password)
         {
+            Description = description;
             Height = height;
             Weight = weight;
             Birth = birth;
@@ -56,6 +60,7 @@ namespace RentalSports.Domain.Entities
         {
         }
 
+        public string Description { get; private set; }
         public decimal Height { get; private set; }
         public decimal Weight { get; private set; }
         public DateTime Birth { get; private set; }
@@ -70,6 +75,7 @@ namespace RentalSports.Domain.Entities
                 .IsNotNullOrEmpty(Email, "Email", "O campo e-mail deve estar preenchido.")
                 .IsNotNullOrEmpty(Password, "Senha", "O campo senha deve estar preenchido.")
                 .IsNotNullOrEmpty(Name, "Nome", "O campo nome deve estar preenchido.")
+                .IsNotNullOrEmpty(Description, "Descrição", "O campo descrição deve estar preenchido.")
                 .IsLowerOrEqualsThan(0, Height, "Altura", "O campo altura deve ser maior que 0.")
                 .IsLowerOrEqualsThan(0, Weight, "Peso", "O campo peso deve ser maior que 0.")
                 .IsNotNull(Birth, "Data nascimento", "O campo data de nascimento deve estar preenchido.")
@@ -81,6 +87,7 @@ namespace RentalSports.Domain.Entities
 
         public void Update(string name,
                            string email,
+                           string description,
                            decimal height,
                            decimal weight,
                            DateTime birth,
@@ -90,6 +97,7 @@ namespace RentalSports.Domain.Entities
         {
             Name = name;
             Email = email;
+            Description = description;
             Height = height;
             Weight = weight;
             Birth = birth;

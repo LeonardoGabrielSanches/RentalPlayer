@@ -11,6 +11,8 @@ namespace RentalSports.WebApi.ViewModels.Players
 
         public string Email { get; set; }
 
+        public string Description { get; set; }
+
         public decimal Height { get; set; }
 
         public decimal Weight { get; set; }
@@ -33,6 +35,7 @@ namespace RentalSports.WebApi.ViewModels.Players
                 Id = player.Id,
                 Name = player.Name,
                 Email = player.Email,
+                Description = player.Description,
                 Height = player.Height,
                 Weight = player.Weight,
                 Birth = player.Birth,

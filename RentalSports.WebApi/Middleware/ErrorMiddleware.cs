@@ -17,7 +17,6 @@ namespace RentalSports.WebApi.Middleware
             _next = next;
         }
 
-
         public async Task Invoke(HttpContext context)
         {
             try

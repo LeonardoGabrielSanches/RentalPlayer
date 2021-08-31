@@ -20,6 +20,9 @@ namespace RentalSports.Infra.Data.MongoDB.Documents
         [BsonElement(PlayerConstants.Password)]
         public string Password { get; set; }
 
+        [BsonElement(PlayerConstants.Description)]
+        public string Description { get; set; }
+
         [BsonElement(PlayerConstants.Height)]
         public decimal Height { get; set; }
 
@@ -48,6 +51,7 @@ namespace RentalSports.Infra.Data.MongoDB.Documents
                 Name = player.Name,
                 Email = player.Email,
                 Password = player.Password,
+                Description = player.Description,
                 Height = player.Height,
                 Weight = player.Weight,
                 Birth = player.Birth,
@@ -67,6 +71,7 @@ namespace RentalSports.Infra.Data.MongoDB.Documents
                 name: playerDocument.Name,
                 email: playerDocument.Email,
                 password: playerDocument.Password,
+                description: playerDocument.Description,
                 height: playerDocument.Height,
                 weight: playerDocument.Weight,
                 birth: playerDocument.Birth,

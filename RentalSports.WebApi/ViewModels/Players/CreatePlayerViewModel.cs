@@ -20,6 +20,9 @@ namespace RentalSports.WebApi.ViewModels.Players
         [Compare("Password", ErrorMessage = "O campo 'Senha' e 'Confirmação de senha' devem ser iguais.")]
         public string PasswordConfirmation { get; set; }
 
+        [Required(ErrorMessage = "O campo 'Descrição' deve estar preenchido.")]
+        public string Description { get; set; }
+
         [Range(0, 300, ErrorMessage = "O campo 'Altura' deve ser maior que zero.")]
         public decimal Height { get; set; }
 
@@ -45,6 +48,7 @@ namespace RentalSports.WebApi.ViewModels.Players
                 name: createPlayerViewModel.Name,
                 email: createPlayerViewModel.Email,
                 password: createPlayerViewModel.Password,
+                description: createPlayerViewModel.Description,
                 height: createPlayerViewModel.Height,
                 weight: createPlayerViewModel.Weight,
                 birth: createPlayerViewModel.Birth,

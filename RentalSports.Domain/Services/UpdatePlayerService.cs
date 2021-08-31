@@ -31,6 +31,7 @@ namespace RentalSports.Domain.Services
 
             playerDB.Update(name: player.Name,
                         email: player.Email,
+                        description: player.Description,
                         height: player.Height,
                         weight: player.Weight,
                         birth: player.Birth,

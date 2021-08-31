@@ -9,6 +9,7 @@
             Name = "Name",
             Email = "Email",
             Password = "Password",
+            Description = "Description",
             Height = "Height",
             Weight = "Weight",
             Birth = "Birth",

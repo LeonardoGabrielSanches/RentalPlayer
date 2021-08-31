@@ -14,6 +14,9 @@ namespace RentalSports.WebApi.ViewModels.Players
         [Required(ErrorMessage = "O campo 'Email' deve estar preenchido.")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "O campo 'Descrição' deve estar preenchido.")]
+        public string Description { get; set; }
+
         [Range(0, 300, ErrorMessage = "O campo 'Altura' deve ser maior que zero.")]
         public decimal Height { get; set; }
 
@@ -39,6 +42,7 @@ namespace RentalSports.WebApi.ViewModels.Players
                 name: updatePlayerViewModel.Name,
                 email: updatePlayerViewModel.Email,
                 password: string.Empty,
+                description: updatePlayerViewModel.Description,
                 height: updatePlayerViewModel.Height,
                 weight: updatePlayerViewModel.Weight,
                 birth: updatePlayerViewModel.Birth,

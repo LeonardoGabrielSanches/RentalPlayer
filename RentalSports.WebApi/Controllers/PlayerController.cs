@@ -15,6 +15,7 @@ namespace RentalSports.WebApi.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(List<PlayerViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [AllowAnonymous]
         public IActionResult GetAll([FromServices] IPlayerRepository playerRepository)
         {
             var players = playerRepository.GetAll();
