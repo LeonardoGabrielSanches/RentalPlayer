@@ -41,7 +41,7 @@ namespace RentalSports.WebApi.Middleware
             var json = new
             {
                 context.Response.StatusCode,
-                Errors = new List<string>() { exception.Message },
+                errors = new List<string>() { exception.Message },
             };
 
             return context.Response.WriteAsync(JsonConvert.SerializeObject(json));

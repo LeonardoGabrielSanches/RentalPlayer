@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace RentalSports.WebApi.Controllers
 {
@@ -17,7 +18,7 @@ namespace RentalSports.WebApi.Controllers
             if (OperationValid())
                 return Ok(result);
 
-            return BadRequest(new { Errors = _errors });
+            return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, errors = _errors });
         }
 
         protected ActionResult CustomResponse(ModelStateDictionary modelState)

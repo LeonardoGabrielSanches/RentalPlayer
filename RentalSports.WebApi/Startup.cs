@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 using RentalSports.WebApi.Configuration;
 using RentalSports.WebApi.IoC;
 using RentalSports.WebApi.Middleware;
-using System;
 
 namespace RentalSports.WebApi
 {
@@ -28,6 +25,7 @@ namespace RentalSports.WebApi
             services.Register();
 
             services.AddCors();
+
             services.AddControllers();
 
             services.ConfigureAuthorization(Configuration);
@@ -52,12 +50,12 @@ namespace RentalSports.WebApi
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-
             app.UseCors(x => x
               .AllowAnyOrigin()
               .AllowAnyMethod()
               .AllowAnyHeader());
+
+            app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();

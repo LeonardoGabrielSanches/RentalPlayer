@@ -49,8 +49,6 @@ namespace RentalSports.Infra.Data.MongoDB.Repositories
         }
 
         public void Delete(Player entity)
-        {
-            _playerCollection.DeleteOne(x => x.Id.ToString() == entity.Id);
-        }
+            => _playerCollection.DeleteOne(x => x.Id.ToString() == entity.Id);
     }
 }
