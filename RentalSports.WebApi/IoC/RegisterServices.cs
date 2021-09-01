@@ -37,6 +37,7 @@ namespace RentalSports.WebApi.IoC
 
             services.AddScoped<ICreatePlayerService, CreatePlayerService>();
             services.AddScoped<IUpdatePlayerService, UpdatePlayerService>();
+            services.AddScoped<IMeInfoService, MeInfoService>();
 
         }
     }
