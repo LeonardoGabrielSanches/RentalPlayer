@@ -73,7 +73,6 @@ namespace RentalSports.Domain.Entities
                 .IsNotNullOrEmpty(Password, "Senha", "O campo senha deve estar preenchido.")
                 .IsNotNullOrEmpty(Name, "Nome", "O campo nome deve estar preenchido.")
                 .IsNotNullOrEmpty(Description, "Descrição", "O campo descrição deve estar preenchido.")
-                .IsLowerOrEqualsThan(0, 175, "Descrição", "O campo descrição deve conter no máximo 175 caracteres.")
                 .IsLowerOrEqualsThan(0, Height, "Altura", "O campo altura deve ser maior que 0.")
                 .IsLowerOrEqualsThan(0, Weight, "Peso", "O campo peso deve ser maior que 0.")
                 .IsNotNull(Birth, "Data nascimento", "O campo data de nascimento deve estar preenchido.")
