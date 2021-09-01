@@ -21,7 +21,7 @@ namespace RentalSports.Domain.Entities
            string mobileNumber,
            Location location,
            string avatarUrl)
-           : base(id, name, email, password)
+           : base(id, name, email, password, avatarUrl)
         {
             Description = description;
             Height = height;
@@ -29,7 +29,6 @@ namespace RentalSports.Domain.Entities
             Birth = birth;
             MobileNumber = mobileNumber;
             Location = location;
-            AvatarUrl = avatarUrl;
         }
 
         public Player(
@@ -43,7 +42,7 @@ namespace RentalSports.Domain.Entities
             string mobileNumber,
             Location location,
             string avatarUrl)
-            : base(name, email, password)
+            : base(name, email, password, avatarUrl)
         {
             Description = description;
             Height = height;
@@ -51,7 +50,6 @@ namespace RentalSports.Domain.Entities
             Birth = birth;
             MobileNumber = mobileNumber;
             Location = location;
-            AvatarUrl = avatarUrl;
 
             Validate();
         }
@@ -66,7 +64,6 @@ namespace RentalSports.Domain.Entities
         public DateTime Birth { get; private set; }
         public string MobileNumber { get; private set; }
         public Location Location { get; private set; }
-        public string AvatarUrl { get; private set; }
 
         public override void Validate()
         {
@@ -75,7 +72,8 @@ namespace RentalSports.Domain.Entities
                 .IsNotNullOrEmpty(Email, "Email", "O campo e-mail deve estar preenchido.")
                 .IsNotNullOrEmpty(Password, "Senha", "O campo senha deve estar preenchido.")
                 .IsNotNullOrEmpty(Name, "Nome", "O campo nome deve estar preenchido.")
-                .IsNotNullOrEmpty(Description, "Descrição", "O campo descrição deve estar preenchido.") // 175
+                .IsNotNullOrEmpty(Description, "Descrição", "O campo descrição deve estar preenchido.")
+                .IsLowerOrEqualsThan(0, 175, "Descrição", "O campo descrição deve conter no máximo 175 caracteres.")
                 .IsLowerOrEqualsThan(0, Height, "Altura", "O campo altura deve ser maior que 0.")
                 .IsLowerOrEqualsThan(0, Weight, "Peso", "O campo peso deve ser maior que 0.")
                 .IsNotNull(Birth, "Data nascimento", "O campo data de nascimento deve estar preenchido.")

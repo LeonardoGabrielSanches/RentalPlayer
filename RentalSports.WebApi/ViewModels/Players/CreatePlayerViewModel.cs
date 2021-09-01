@@ -21,6 +21,7 @@ namespace RentalSports.WebApi.ViewModels.Players
         public string PasswordConfirmation { get; set; }
 
         [Required(ErrorMessage = "O campo 'Descrição' deve estar preenchido.")]
+        [StringLength(175, ErrorMessage = "O campo 'Descrição deve ser de no máximo 175 caracteres.'")]
         public string Description { get; set; }
 
         [Range(0, 300, ErrorMessage = "O campo 'Altura' deve ser maior que zero.")]
